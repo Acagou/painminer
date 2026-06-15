@@ -1,27 +1,25 @@
 import Link from "next/link";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 
-type CTAButtonProps = {
+type ButtonProps = {
   href?: string;
   children: ReactNode;
   variant?: "primary" | "secondary";
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const styles = {
-  primary:
-    "bg-accent text-white border-accent hover:bg-orange-600 focus-visible:outline-accent",
-  secondary:
-    "bg-chip text-ink border-line hover:border-accent focus-visible:outline-accent"
+const variants = {
+  primary: "border-neutral-950 bg-neutral-950 text-white hover:bg-neutral-800",
+  secondary: "border-neutral-300 bg-white text-neutral-950 hover:border-neutral-500"
 };
 
-export function CTAButton({
+export function Button({
   href,
   children,
   variant = "primary",
   className = "",
   ...props
-}: CTAButtonProps) {
-  const classes = `inline-flex min-h-11 items-center justify-center rounded-full border px-5 py-2.5 text-sm font-semibold transition ${styles[variant]} ${className}`;
+}: ButtonProps) {
+  const classes = `inline-flex min-h-11 items-center justify-center rounded-md border px-5 py-2.5 text-sm font-semibold transition ${variants[variant]} ${className}`;
 
   if (href) {
     return (

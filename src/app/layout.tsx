@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "PainMiner",
-  description: "Paste complaints. Get buildable app ideas."
+  description: "Paste a thread. Get one app idea worth testing."
 };
 
 export default function RootLayout({

@@ -5,14 +5,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#f5f7fa",
-        muted: "#9ca7b3",
-        line: "#2a323c",
-        paper: "#0b0f14",
-        card: "#111820",
-        chip: "#1b2530",
-        accent: "#ff4500",
-        "accent-soft": "#2a170f"
+        ink: "#171717",
+        muted: "#525252",
+        line: "#e5e5e5",
+        paper: "#ffffff",
+        card: "#ffffff",
+        chip: "#f5f5f5",
+        accent: "#171717",
+        "accent-soft": "#f5f5f5"
       }
     }
   },

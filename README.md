@@ -1,6 +1,24 @@
 # PainMiner
 
-PainMiner turns pasted complaints, Reddit threads, app reviews, forum posts, and customer conversations into buildable app ideas.
+PainMiner does one thing well: it turns one messy Reddit-style thread or online discussion into one app idea worth testing.
+
+Main promise:
+
+```text
+Paste a thread. Get one app idea worth testing.
+```
+
+## What V1 includes
+
+- Landing page: `/`
+- Analyzer page: `/analyze`
+- Result page: `/result`
+- Example page: `/example`
+- Local mock idea generation
+- Copy App Idea button
+- Local state only
+
+V1 intentionally has no database, login, payments, Reddit API, saved reports, dashboards, trend tracking, or external API calls.
 
 ## Local setup
 
@@ -9,7 +27,11 @@ npm.cmd install
 npm.cmd run dev
 ```
 
-Open `http://localhost:3000`.
+Open:
+
+```text
+http://localhost:3000
+```
 
 ## Build
 
@@ -32,25 +54,22 @@ npm.cmd start
 2. Import the repository in Netlify.
 3. Build command: `npm run build`.
 4. Publish directory: `.next`.
-5. For full Next.js support, use Netlify's Next.js runtime/plugin when prompted.
+5. Enable Netlify's Next.js runtime/plugin when prompted.
 
-## Where to plug in OpenAI later
+## Where to add OpenAI later
 
-The mock report generator lives in `src/lib/report.ts`.
+The mock generator is in:
 
-Replace or wrap `generateMockReport()` with an API route that sends:
+```text
+src/lib/idea.ts
+```
 
-- source type
-- niche/topic
-- goal
-- pasted text
-
-Then return the same `OpportunityReport` shape from `src/types/report.ts`. Keeping the same shape means the report UI can stay mostly unchanged.
+Replace `generateMockIdea()` with an API route that accepts the same `AnalyzerInput` shape and returns the same `IdeaResult` shape.
 
 Suggested future route:
 
 ```text
-src/app/api/generate-report/route.ts
+src/app/api/generate-idea/route.ts
 ```
 
-The analyzer page currently stores the generated report in `sessionStorage` before navigating to `/report`.
+The analyzer currently stores the generated result in `sessionStorage` before navigating to `/result`.

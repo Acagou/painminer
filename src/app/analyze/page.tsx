@@ -2,97 +2,64 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { CTAButton } from "@/components/CTAButton";
-import { SelectInput } from "@/components/SelectInput";
-import { TextAreaInput } from "@/components/TextAreaInput";
-import { generateMockReport } from "@/lib/report";
-
-const sourceTypes = [
-  "Reddit thread",
-  "App reviews",
-  "YouTube comments",
-  "Facebook group discussion",
-  "Customer interview notes",
-  "Support tickets",
-  "Forum discussion",
-  "Other"
-];
-
-const goals = [
-  "Find app ideas",
-  "Find content ideas",
-  "Find product complaints",
-  "Find service business opportunities",
-  "Find buyer language"
-];
+import { Button } from "@/components/Button";
+import { Input } from "@/components/Input";
+import { TextArea } from "@/components/TextArea";
+import { generateMockIdea } from "@/lib/idea";
 
 export default function AnalyzePage() {
   const router = useRouter();
-  const [sourceType, setSourceType] = useState(sourceTypes[0]);
-  const [goal, setGoal] = useState(goals[0]);
-  const [niche, setNiche] = useState("");
-  const [pastedText, setPastedText] = useState("");
+  const [topic, setTopic] = useState("");
+  const [threadText, setThreadText] = useState("");
   const [error, setError] = useState("");
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (pastedText.trim().length < 300) {
-      setError("Paste at least 300 characters so PainMiner has enough signal to analyze.");
+    if (threadText.trim().length < 300) {
+      setError("Paste at least 300 characters so PainMiner has enough real signal to work with.");
       return;
     }
 
-    const report = generateMockReport({ sourceType, niche, goal, pastedText });
-    sessionStorage.setItem("painminer-report", JSON.stringify(report));
-    router.push("/report");
+    const result = generateMockIdea({ topic, threadText });
+    sessionStorage.setItem("painminer-result", JSON.stringify(result));
+    router.push("/result");
   }
 
   return (
-    <div className="bg-paper">
-      <section className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+    <div className="bg-white">
+      <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-ink">Analyze pasted complaints</h1>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">
-            Paste real customer pain. V1 uses local mock generation, so nothing is
-            sent to an API yet.
+          <h1 className="text-3xl font-bold text-neutral-950">Find one app idea</h1>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-700">
+            Paste one messy discussion. PainMiner will return one focused idea,
+            not a dashboard.
           </p>
         </div>
 
-        <form className="rounded-2xl border border-line bg-card p-5 shadow-sm" onSubmit={handleSubmit}>
-          <div className="grid gap-5 md:grid-cols-2">
-            <SelectInput
-              label="Source Type"
-              onChange={setSourceType}
-              options={sourceTypes}
-              value={sourceType}
-            />
-            <SelectInput label="Goal" onChange={setGoal} options={goals} value={goal} />
-          </div>
-          <label className="mt-5 block">
-            <span className="text-sm font-semibold text-ink">Niche/topic</span>
-            <input
-              className="mt-2 h-11 w-full rounded-full border border-line bg-paper px-4 text-sm text-ink outline-none transition placeholder:text-gray-500 focus:border-accent focus:ring-2 focus:ring-orange-950"
-              onChange={(event) => setNiche(event.target.value)}
-              placeholder="Example: small business service owners"
-              value={niche}
-            />
-          </label>
+        <form className="rounded-lg border border-neutral-200 bg-white p-5 shadow-sm" onSubmit={handleSubmit}>
+          <Input
+            label="Optional topic or subreddit"
+            onChange={setTopic}
+            placeholder="Example: r/freelance"
+            value={topic}
+          />
           <div className="mt-5">
-            <TextAreaInput
+            <TextArea
               error={error}
-              label="Pasted text"
+              label="Paste the thread, comments, reviews, or discussion"
               onChange={(value) => {
-                setPastedText(value);
+                setThreadText(value);
                 if (error && value.trim().length >= 300) setError("");
               }}
-              placeholder="Paste a messy Reddit thread, review dump, customer conversation, support tickets, or notes here."
-              value={pastedText}
+              placeholder="Paste the full thread here. Include the post and a few comments if possible."
+              value={threadText}
             />
           </div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs leading-5 text-muted">
-              No database, login, payments, Reddit API, or OpenAI API in this V1.
+            <p className="text-xs leading-5 text-neutral-500">
+              Local state only. No database, login, Reddit API, or external API.
             </p>
-            <CTAButton type="submit">Generate Opportunity Report</CTAButton>
+            <Button type="submit">Find the app idea</Button>
           </div>
         </form>
       </section>

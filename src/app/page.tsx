@@ -1,162 +1,80 @@
-import { CTAButton } from "@/components/CTAButton";
-import { IdeaCard } from "@/components/IdeaCard";
-import { PricingCard } from "@/components/PricingCard";
-import { ReportSection } from "@/components/ReportSection";
-import { sampleReport } from "@/lib/report";
+import { Button } from "@/components/Button";
+import { ExampleCard } from "@/components/ExampleCard";
 
 const howItWorks = [
-  "Paste a complaint thread, review dump, support conversation, or customer notes.",
-  "Choose the source type, niche, and what you want to find.",
-  "Get a structured opportunity report with scores, app ideas, copy, and a Codex prompt."
-];
-
-const outputs = [
-  "Pain summary and repeated pain signals",
-  "Exact user language you can reuse",
-  "Top 3 app ideas with a best recommendation",
-  "Opportunity score out of 35",
-  "MVP feature list, pricing model, validation post, and Codex build prompt"
-];
-
-const audiences = [
-  "Solo founders validating a narrow SaaS idea",
-  "Indie hackers mining app reviews and forums",
-  "Codex and Lovable users looking for build prompts",
-  "Creators turning audience complaints into useful tools"
+  "Paste one messy thread, review set, or forum discussion.",
+  "PainMiner looks for the real complaint inside the text.",
+  "You get one app idea, one first feature, one validation test."
 ];
 
 export default function Home() {
   return (
-    <div className="bg-paper">
-      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_360px]">
-        <div className="flex flex-col justify-center">
-          <p className="text-sm font-semibold text-accent">
-            r/PainMiner
-          </p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-bold tracking-normal text-ink sm:text-5xl">
-            Paste complaints. Get buildable app ideas.
+    <div className="bg-white">
+      <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+        <div className="max-w-3xl">
+          <h1 className="text-4xl font-bold tracking-normal text-neutral-950 sm:text-5xl">
+            Paste a thread. Get one app idea worth testing.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
-            PainMiner turns messy Reddit threads, app reviews, customer complaints, and
-            forum posts into clear opportunity reports, MVP specs, validation posts,
-            and Codex build prompts.
+          <p className="mt-5 text-lg leading-8 text-neutral-700">
+            PainMiner finds the real complaint inside a Reddit thread, app review,
+            or forum discussion and turns it into one focused app idea with a clear
+            first feature.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <CTAButton href="/analyze">Analyze Text</CTAButton>
-            <CTAButton href="/sample-report" variant="secondary">
-              See Sample Report
-            </CTAButton>
+            <Button href="/analyze">Find an app idea</Button>
+            <Button href="/example" variant="secondary">See example</Button>
           </div>
         </div>
-        <aside className="rounded-2xl border border-line bg-card p-5">
-          <p className="text-sm font-semibold uppercase tracking-wide text-muted">
-            Popular opportunity
+      </section>
+
+      <section className="border-y border-neutral-200 bg-neutral-50">
+        <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
+          <h2 className="text-2xl font-bold text-neutral-950">What it does</h2>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-neutral-700">
+            It turns one messy discussion into one clear product direction:
+            the pain, the user, the first feature, the risk, and the next test.
           </p>
-          <div className="mt-4 space-y-3 text-sm leading-6 text-muted">
-            <p>
-              <span className="font-semibold text-ink">Pain:</span>{" "}
-              {sampleReport.painSummary}
-            </p>
-            <p>
-              <span className="font-semibold text-ink">Best idea:</span>{" "}
-              QuickQuote Builder
-            </p>
-            <p>
-              <span className="font-semibold text-ink">Score:</span>{" "}
-              {sampleReport.totalScore}/35, {sampleReport.scoreLabel}
-            </p>
-          </div>
-        </aside>
-      </section>
-
-      <section className="border-y border-line bg-card">
-        <div className="mx-auto grid max-w-7xl gap-5 px-4 py-10 sm:px-6 md:grid-cols-3">
-          {howItWorks.map((item, index) => (
-            <div key={item} className="rounded-2xl border border-line bg-paper p-5">
-              <p className="text-sm font-semibold text-accent">r/step_{index + 1}</p>
-              <p className="mt-3 text-sm leading-6 text-muted">{item}</p>
-            </div>
-          ))}
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 md:grid-cols-2">
-        <ReportSection title="What PainMiner gives you">
-          <ul className="space-y-2">
-            {outputs.map((item) => (
-              <li key={item}>- {item}</li>
-            ))}
-          </ul>
-        </ReportSection>
-        <ReportSection title="Who it is for">
-          <ul className="space-y-2">
-            {audiences.map((item) => (
-              <li key={item}>- {item}</li>
-            ))}
-          </ul>
-        </ReportSection>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-10 sm:px-6">
-        <h2 className="text-2xl font-bold text-ink">Sample output preview</h2>
+      <section className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
+        <h2 className="text-2xl font-bold text-neutral-950">How it works</h2>
         <div className="mt-5 grid gap-4 md:grid-cols-3">
-          {sampleReport.appIdeas.map((idea, index) => (
-            <IdeaCard idea={idea} index={index} key={idea.name} />
+          {howItWorks.map((item, index) => (
+            <div key={item} className="rounded-lg border border-neutral-200 bg-white p-5">
+              <p className="text-sm font-semibold text-neutral-950">Step {index + 1}</p>
+              <p className="mt-3 text-sm leading-6 text-neutral-700">{item}</p>
+            </div>
           ))}
         </div>
       </section>
 
-      <section className="border-y border-line bg-card">
-        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h2 className="text-2xl font-bold text-ink">Pricing preview</h2>
-              <p className="mt-2 text-sm text-muted">
-                Payments are coming soon. V1 is focused on proving the report format.
-              </p>
-            </div>
-            <CTAButton href="/pricing" variant="secondary">
-              View Pricing
-            </CTAButton>
-          </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <PricingCard
-              description="For trying the report format."
-              features={["3 reports per month", "Manual paste input", "Markdown export"]}
-              name="Free"
-              price="$0"
-            />
-            <PricingCard
-              description="For builders actively researching ideas."
-              features={["25 reports", "Copy-ready outputs", "Future saved history"]}
-              highlighted
-              name="Starter"
-              price="$9/mo"
-            />
-            <PricingCard
-              description="For people turning ideas into builds."
-              features={["Unlimited reports", "Build Packs", "Future AI generation"]}
-              name="Builder"
-              price="$19/mo"
-            />
+      <section className="border-y border-neutral-200 bg-neutral-50">
+        <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
+          <h2 className="text-2xl font-bold text-neutral-950">Example output</h2>
+          <div className="mt-5">
+            <ExampleCard />
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-        <h2 className="text-2xl font-bold text-ink">FAQ</h2>
-        <div className="mt-5 grid gap-4 md:grid-cols-2">
-          {[
-            ["Does V1 use Reddit API?", "No. Paste text manually. That keeps the MVP simple and fast."],
-            ["Does it use OpenAI yet?", "No. This version uses mock generation so the report format can be tested first."],
-            ["What should I paste?", "Threads, reviews, comments, support tickets, sales notes, or customer interviews."],
-            ["What is the goal?", "Find real pains that can become narrow app ideas, validation posts, and build prompts."]
-          ].map(([question, answer]) => (
-            <div key={question} className="rounded-2xl border border-line bg-card p-5">
-              <h3 className="font-semibold text-ink">{question}</h3>
-              <p className="mt-2 text-sm leading-6 text-muted">{answer}</p>
-            </div>
-          ))}
+      <section className="mx-auto grid max-w-5xl gap-6 px-4 py-12 sm:px-6 md:grid-cols-2">
+        <div>
+          <h2 className="text-2xl font-bold text-neutral-950">
+            Why one idea is better than ten
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-neutral-700">
+            Ten ideas create more decisions. One focused idea gives you a next
+            action: test the pain, build the first feature, or move on.
+          </p>
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold text-neutral-950">FAQ</h2>
+          <div className="mt-3 space-y-4 text-sm leading-6 text-neutral-700">
+            <p><strong className="text-neutral-950">Does it use Reddit API?</strong><br />No. Paste text manually in V1.</p>
+            <p><strong className="text-neutral-950">Does it use OpenAI?</strong><br />No. The app uses mock logic now, with a clear replacement point for OpenAI later.</p>
+            <p><strong className="text-neutral-950">What should I paste?</strong><br />One Reddit-style thread, app review set, or forum discussion with real complaints.</p>
+          </div>
         </div>
       </section>
     </div>
