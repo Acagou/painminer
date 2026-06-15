@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CopyButton } from "@/components/CopyButton";
 import { CTAButton } from "@/components/CTAButton";
+import { FounderSnapshot } from "@/components/FounderSnapshot";
 import { IdeaCard } from "@/components/IdeaCard";
 import { ReportSection } from "@/components/ReportSection";
 import { ScoreCard } from "@/components/ScoreCard";
@@ -45,6 +46,8 @@ export default function ReportPage() {
         </div>
 
         <div className="grid gap-5">
+          <FounderSnapshot report={report} />
+
           <ReportSection title="Pain Summary">
             <p>{report.painSummary}</p>
           </ReportSection>
